@@ -25,14 +25,14 @@ export default function Sidebar() {
             <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
                 Tweet
             </button>
-            <div className='text-[#d9d9d9] flex items-center justify-center hoverAnimation xl:ml-auto xl:-mr-5 mt-auto'>
-                <img src="" alt="" className='h-10 w-10 rounded-full xl:mr-2.5'/>
+            <div className="text-[#d9d9d9] flex items-center justify-center hoverAnimation xl:ml-auto xl:-mr-5 mt-auto">
+                <img src="" alt="" className="h-10 w-10 rounded-full xl:mr-2.5"/>
             
-                <div className='hidden xl:inline leading-5'>
-                    <h4 className='font-bold'>blablalba</h4>
-                    <p className='text-[#6e767d]'>@blablalba</p>
+                <div className="hidden xl:inline leading-5">
+                    <h4 className="font-bold">blablalba</h4>
+                    <p className="text-[#6e767d]">@blablalba</p>
                 </div>
-                <DotsHorizontalIcon className='h-5 hidden xl:inline ml-10' />
+                <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
             </div>
         </div>
     )
