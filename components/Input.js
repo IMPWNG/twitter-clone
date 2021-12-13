@@ -1,14 +1,37 @@
 import { useState, useRef } from 'react'
+
 import { XIcon } from '@heroicons/react/solid';
 import { PhotographIcon, ChartBarIcon, EmojiHappyIcon, CalendarIcon } from '@heroicons/react/outline';
+
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from 'emoji-mart';
+
+import { db, storage } from "../firebase";
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from "@firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 
 export default function Input() {
     const [input, setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     const filePickerRef = useRef(null);
     const [showEmojis, setShowEmojis] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const sendPost = async () => {
+        if (loading) return;
+        setLoading(true);
+
+        const docRef = await addDoc(collection(db, 'post'), {
+            // id: session.user.uid,
+            // username: session.user.name,
+            // userImg: session.user.image,
+            // tag: session.user.tag,
+            text: input,
+            timestamp: serverTimestamp(),
+        });
+
+        const imageRef = ref(storage, `posts/${docRef.id}/image`);
+    };
 
     const addImageToPost = () => {
 
