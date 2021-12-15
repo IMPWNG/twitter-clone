@@ -10,22 +10,25 @@ import { db, storage } from "../firebase";
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 
+import { useSession } from 'next-auth/react';
+
 export default function Input() {
+    const { data: session } = useSession();
     const [input, setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
-    const filePickerRef = useRef(null);
     const [showEmojis, setShowEmojis] = useState(false);
     const [loading, setLoading] = useState(false);
+    const filePickerRef = useRef(null);
 
     const sendPost = async () => {
         if (loading) return;
         setLoading(true);
 
-        const docRef = await addDoc(collection(db, 'post'), {
-            // id: session.user.uid,
-            // username: session.user.name,
-            // userImg: session.user.image,
-            // tag: session.user.tag,
+        const docRef = await addDoc(collection(db, "posts"), {
+            id: session.user.uid,
+            username: session.user.name,
+            userImg: session.user.image,
+            tag: session.user.tag,
             text: input,
             timestamp: serverTimestamp(),
         });
@@ -69,7 +72,7 @@ export default function Input() {
     return (
         <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll ${loading && "opacity-60"}`}>
             <img 
-                src=""
+                src={session.user.image}
                 alt="" 
                 className="h-11 w-11 rounded-full cursor-pointer"
             />
