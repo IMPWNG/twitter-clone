@@ -99,7 +99,7 @@ export default function Post({ id, post, postPage}) {
                                 @{post?.tag}
                             </span>
                         </div>
-                        {" "}.
+                        ·{"   "}
                         <span className="hover:underline text-sm sm:text-[15px]">
                             <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
                         </span>
