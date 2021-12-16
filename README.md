@@ -1,1 +1,4 @@
-Add log + .env for firebase key
+###
+
+JWT SECRET : 'decryption operation failed' - have to generate a HS512 key
+
