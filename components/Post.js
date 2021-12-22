@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import Moment from 'react-moment';
-import { useSession } from "next-auth/react";
+
 
 import { ChartBarIcon, ChatIcon, DotsHorizontalIcon, HeartIcon, ShareIcon, SwitchHorizontalIcon, TrashIcon } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconFilled, ChatIcon as ChatIconFilled, } from "@heroicons/react/solid";
@@ -17,7 +17,7 @@ import { db } from "../firebase";
 
 
 export default function Post({ id, post, postPage}) {
-    const { data: session } = useSession();
+   
     const [isOpen, setIsOpen] = useRecoilState(modalState);
     const [postId, setPostId] = useRecoilState(postIdState);
     const [comments, setComments] = useState([]);
@@ -145,7 +145,7 @@ export default function Post({ id, post, postPage}) {
                     <div/>
                 </div>
 
-                    {session.user.uid === post?.id ? (
+                    
                         <div
                             className="flex items-center space-x-1 group"
                             onClick={(e) => {
@@ -164,7 +164,7 @@ export default function Post({ id, post, postPage}) {
                                 <SwitchHorizontalIcon className="h-5 group-hover:text-green-500" />
                             </div>
                         </div>
-                    )}
+                    )
                     
                     <div
                         className="flex items-center space-x-1 group"

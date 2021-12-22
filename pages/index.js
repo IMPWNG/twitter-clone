@@ -3,19 +3,22 @@ import Sidebar from '../components/Sidebar';
 import Feed from '../components/Feed';
 import Modal from '../components/Modal';
 import Widgets from '../components/Widgets';
-import { getProviders, getSession, useSession } from "next-auth/react";
 import Login from '../components/Login';
 import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
+import { useMoralis } from "react-moralis";
 
 
 
 export default function Home({ trendingResults, followResults, providers }) {
-  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const { isAuthenticated } = useMoralis();
 
-
-  if (!session) return <Login providers={providers} />
+  if (!isAuthenticated) {
+    return (
+      <Login />
+    );  
+  }
 
   return (
     <div className="">
@@ -35,26 +38,4 @@ export default function Home({ trendingResults, followResults, providers }) {
       </main>
     </div>
   )
-}
-
-export async function getServerSideProps(context) {
-  const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(
-    (res) => res.json()
-  );
-
-  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
-    (res) => res.json()
-  );
-
-  const providers = await getProviders();
-  const session = await getSession(context);
-
-  return {
-    props: {
-      trendingResults,
-      followResults,
-      providers,
-      session,
-    },
-  };
 }
